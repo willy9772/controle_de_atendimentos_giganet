@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Atendimentos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="screen">
+
+        <div class="borrar-fundo"></div>
+
+        <header>
+            <h1>Olá William!</h1>
+            <div class="h-left">
+                <button class="mdsgn-button" id="btn-registrar">Registrar Atendimento</button>
+                <button class="mdsgn-button" id="btn-open-settings"><i class="fa-solid fa-gear"></i></button>
+            </div>
+        </header>
+
+        <div class="userAuth">
+            <h1><i class="fa-solid fa-triangle-exclamation"></i> Área Restrita</h1>
+            <div class="login-box">
+                <h2>Insira a Chave para Acessar</h2>
+                <form class="login-form">
+                    <input id="password" type="password" name="acessKey" required autofocus>
+                    <label for="password">Chave de acesso</label>
+                    
+                    <input type="submit" class="mdsgn-button">
+
+                </form>
+                <span class="aviso-login"></span>
+            </div>
+        </div>
+
+        <main class="dashboard">
+
+            <div class="tabela">
+                <h1><i class="fa-solid fa-money-bill"></i>Vendas</h1>
+                <table class="tabela-vendas">
+                    <thead>
+                        <tr>
+                            <td>Colaborador</td>
+                            <td>Última Venda</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tabela">
+                <h1><i class="fa-solid fa-headset"></i>Atendimentos</h1>
+                <table class="tabela-atendimentos">
+                    <thead>
+                        <tr>
+                            <td>Colaborador</td>
+                            <td>Setor</td>
+                            <td>Último Atendimento</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tabela">
+                <h1><i class="fa-solid fa-globe"></i>Onlines</h1>
+                <table class="tabela-onlines">
+                    <thead>
+                        <tr>
+                            <td>Colaborador</td>
+                            <td>Ativo Até</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="filter-box">
+                <h3>Filtrar Por Colaborador</h3>
+                <form class="filter">
+                    <input type="text">
+                    <input type="submit" value="ok" class="mdsgn-button">
+                </form>
+            </div>
+
+        </main>
+
+        <section class="transferir-atendimentos">
+
+            <h1 class="transferir-atendimentos-title"><i class="fa-solid fa-arrow-left"></i> Transferir Atendimentos
+            </h1>
+
+            <form class="transferir-atendimento" id="transferir-atendimento">
+
+                <div class="text-input">
+                    <input id="colaborador" type="text" name="colaborador" required>
+                    <label for="colaborador">Colaborador</label>
+                </div>
+
+                <div class="checkboxes">
+
+                    <input id="atendimento" type="radio" name="tipo" value="atendimento" checked required>
+                    <label for="atendimento">atendimento</label>
+
+                    <input id="venda" type="radio" name="tipo" value="venda" required>
+                    <label for="venda">venda</label>
+
+                </div>
+
+                <input type="submit" class="mdsgn-button">
+
+            </form>
+
+            <span class="aviso">Transferido com sucesso!</span>
+
+        </section>
+
+        <div class="rodape">William Gerhard © 2023</div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
