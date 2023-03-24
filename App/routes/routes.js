@@ -22,8 +22,10 @@ router.post("/user/login", (req, res)=>{
 
     if (!result){
         res(false)
+        return
     } else {
         res(result)
+        return
     }
 
 })

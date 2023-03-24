@@ -32,7 +32,7 @@ async function verificarLogin(){
         return
     }
 
-    const login = await login(password)
+    const login = await verificarPassKey(password)
 
     if(password !== "1") {
         mostrarAviso("Senha Incorreta, tente novamente")
@@ -62,7 +62,9 @@ async function verificarLogin(){
 
     }
 
-    async function login(password){
+    async function verificarPassKey(password){
+
+        console.log(`Verificando Password ${password}`)
 
         const res = await fetch('/user/login', {
             method: 'POST',
