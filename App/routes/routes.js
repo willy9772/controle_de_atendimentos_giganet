@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const { User_Login } = require("./Funções")
+const path = require("path")
 
 
 
@@ -14,21 +15,26 @@ router.get("/Painel", (req, res)=>{
 
 router.post("/user/login", (req, res)=>{
 
-    console.log(req.body)
-
     const key = req.body.key
 
     const result = User_Login(key)
 
+    console.log(result);
+
     if (!result){
-        res(false)
+        res.send(false)
         return
     } else {
-        res(result)
+        res.send(result)
         return
     }
 
 })
 
+router.get("/colaboradores", (req, res)=>{
+
+    res.sendFile(path.join(__dirname, "..", "..", "Server", "Config", "Colaboradores.json"))
+
+})
 
 module.exports = router

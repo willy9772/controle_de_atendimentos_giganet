@@ -20,7 +20,7 @@ function startExpress() {
 
     console.log("Rotas Carregadas com Sucesso!")
 
-    server.listen(3039, () => {
+    server.listen(3000, () => {
         console.log(`Servidor Sendo Executado com Sucesso!`)
     })
 }

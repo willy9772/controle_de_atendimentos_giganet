@@ -9,8 +9,8 @@ addListenerTabelas()
 
 /* Funcionamento Geral */
 
-async function getUpdates() {
-    const response = await fetch("./Files/colaboradores.json");
+async function getUpdates() { 
+    const response = await fetch("/colaboradores");
     const data = await response.json();
     return data;
   }
@@ -34,7 +34,7 @@ async function verificarLogin(){
 
     const login = await verificarPassKey(password)
 
-    if(password !== "1") {
+    if(!login.status) {
         mostrarAviso("Senha Incorreta, tente novamente")
         return
     }
@@ -64,9 +64,9 @@ async function verificarLogin(){
 
     async function verificarPassKey(password){
 
-        console.log(`Verificando Password ${password}`)
+        let res = ""
 
-        const res = await fetch('/user/login', {
+        await fetch('/user/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -76,8 +76,10 @@ async function verificarLogin(){
             })
           })
           .then(response => response.json())
-          .then(data => console.log(data))
+          .then(data => res = data)
           .catch(error => console.error(error));
+
+          localStorage.setItem("username", res.nome)
 
           return res
 
@@ -92,6 +94,8 @@ async function verificarLogin(){
 async function carregarDashboard(){
     dashboard_section.style.display = "flex"
     header.style.display = "flex"
+
+    atualizarUsername()
 
     const colaboradores = await getUpdates()
 
@@ -188,6 +192,17 @@ function renderOnlines(colaboradores){
     })
 }
 
+function atualizarUsername(){
+
+    console.log(`Atualizando Username`);
+
+    const title = document.querySelector("#username-title")
+    const username = localStorage.getItem("username")
+
+    title.innerText = `Olá ${username}!`
+
+}
+
 /* Tabela */
 
 function addListenerTabelas (){
@@ -211,7 +226,6 @@ function addListenerTabelas (){
 }
 
 /* Registrar Atendimentos */
-
 (function(){
 
     const btnAbrir = document.getElementById("btn-registrar")
