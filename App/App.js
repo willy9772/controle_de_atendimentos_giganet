@@ -1,15 +1,21 @@
 const express = require("express")
-const app = express()
-const port = 3000
-const path = require("path")
+const server = express()
 
 
 
-const { rotas } = require("./routes/routes")
-app.use("/", rotas)
+
+//Express Rotas
+server.use(express.static("./routes/FrontEnd"))
+
+const router = require("./routes/routes")
+server.use("/", router)
+
+server.use(express.json())
 
 
 
-app.listen(port, () => {
-    console.log("Servidor sendo executado com sucesso na porta " + port)
+
+
+server.listen(3000, ()=>{
+    console.log("Servidor sendo executado na porta 3000")
 })

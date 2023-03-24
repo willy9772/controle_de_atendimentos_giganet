@@ -1,22 +1,14 @@
-const { Router } = require("express");
-const rotas = Router()
+const express = require("express")
+const router = express.Router()
 
 
 
-rotas.get("/", (req, res) => {
-    res.redirect("./painel")
+router.get("/", (req, res)=>{
+    res.redirect("/Painel")
 })
 
-rotas.get("/painel", (req, res)=>{
-    res.sendFile()
+router.get("/Painel", (req, res)=>{
+    res.sendFile( __dirname + "/FrontEnd/index.html")
 })
 
-
-
-
-
-
-
-
-
-module.exports = { rotas }
+module.exports = router
