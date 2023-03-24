@@ -1,3 +1,4 @@
+const bodyParser = require("body-parser")
 const express = require("express")
 const server = express()
 
@@ -10,7 +11,8 @@ server.use(express.static("./routes/FrontEnd"))
 const router = require("./routes/routes")
 server.use("/", router)
 
-server.use(express.json())
+server.use(bodyParser.json()); // processa o corpo da solicitação como JSON
+server.use(bodyParser.urlencoded({ extended: true })); // processa o corpo da solicitação como URL-encoded
 
 
 

@@ -22,7 +22,7 @@ login_section.querySelector("form").addEventListener("submit", (form)=>{
     verificarLogin()
 })
 
-function verificarLogin(){
+async function verificarLogin(){
 
     const passwordInput = document.getElementById("password")
     const password = passwordInput.value
@@ -31,6 +31,8 @@ function verificarLogin(){
         mostrarAviso("O campo não pode estar vazio!")
         return
     }
+
+    const login = await login(password)
 
     if(password !== "1") {
         mostrarAviso("Senha Incorreta, tente novamente")
@@ -57,6 +59,25 @@ function verificarLogin(){
         login_section.style.display = "none"
 
         carregarDashboard()
+
+    }
+
+    async function login(password){
+
+        const res = await fetch('/user/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              key: password
+            })
+          })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error(error));
+
+          return res
 
     }
 
