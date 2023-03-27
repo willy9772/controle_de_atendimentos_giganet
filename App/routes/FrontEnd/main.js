@@ -86,6 +86,8 @@ async function verificarLogin(){
 
     fecharLogin()
 
+    inicializarSocket()
+
 }
 
 /* Dashboard */
@@ -354,5 +356,22 @@ function filtrarPorData(objeto, chave){
     objeto.sort(compareLastAtendimento);
     
     return objeto
+
+}
+
+
+
+
+/* Socket IO */
+
+function inicializarSocket(){
+    
+    const socket = io("http://10.20.30.12:3500");
+
+    socket.on('connect', () => {
+      console.log('Conectado ao servidor');
+    });
+    
+    return socket
 
 }
