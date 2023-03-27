@@ -1,4 +1,5 @@
 const { startExpress } = require("./express/startExpress");
+const escutarEventos = require("./Socket.io/Events/listeners");
 const { startSocket } = require("./Socket.io/startSocket.io");
 
 (async function(){
@@ -7,9 +8,9 @@ const { startSocket } = require("./Socket.io/startSocket.io");
     const app = startExpress()
 
     // Start Socket
-    startSocket(app)
+    const io = startSocket(app)
 
     // Listeners
-    
+    escutarEventos(io)
 
 })()

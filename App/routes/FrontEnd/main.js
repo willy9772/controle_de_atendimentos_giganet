@@ -202,8 +202,6 @@ function renderOnlines(colaboradores){
 
 function atualizarUsername(){
 
-    console.log(`Atualizando Username`);
-
     const title = document.querySelector("#username-title")
     const username = localStorage.getItem("username")
 
@@ -353,8 +351,6 @@ function filtrarHorarios(objeto, chave){
         }
       });
       
-      console.log(objeto);
-
       return objeto.reverse()
 
 }
@@ -394,16 +390,17 @@ function filtrarPorData(objeto, chave){
 /* Socket IO */
 
 function inicializarSocket(){
-
-    console.log(window.location.hostname)
     
     const socket = io(`http://${window.location.hostname}:3500`);
 
     socket.on('connect', () => {
       console.log('Conectado ao servidor com sucesso');
     });
+
+    socket.on("atualizar dashboard", (data)=>{
+        carregarDashboard(data.data)
+    })
     
     return socket
 
 }
-
