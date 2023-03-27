@@ -23,6 +23,9 @@ function startExpress() {
     server.listen(3000, () => {
         console.log(`Servidor Sendo Executado com Sucesso!`)
     })
+
+    return server
+
 }
 
 module.exports = { startExpress }

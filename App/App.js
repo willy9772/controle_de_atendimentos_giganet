@@ -1,4 +1,5 @@
 const { startExpress } = require("./express/startExpress");
+const { startSocket } = require("./Socket.io/startSocket.io");
 
 
 
@@ -6,9 +7,10 @@ const { startExpress } = require("./express/startExpress");
 (async function(){
 
     // Iniciar Express
-    startExpress()
+    const app = startExpress()
 
-
+    // Start Socket
+    startSocket(app)
 
 
 
