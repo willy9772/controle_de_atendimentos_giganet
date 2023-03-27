@@ -1,23 +1,24 @@
 const fs = require("fs")
 const path = require("path")
 
-const colaboradoresPath = path.join(__dirname, "..", "..", "Server", "Colaboradores.json")
+const colaboradoresPath = path.join(__dirname, "..", "..", "..", "Server", "Config", "Colaboradores.json")
 
 
-function adicionarAtendimento(colaborador, tipo, autor, io){
+function adicionarAtendimento(colaborador, tipo, autor) {
 
     const colaboradores = JSON.parse(fs.readFileSync(colaboradoresPath))
 
     const user = colaboradores.find(obj => obj.nome == colaborador)
 
-    if (tipo == "Atendimento"){
+    if (tipo == "Atendimento") {
         user.ultimo_atendimento = `${getCurrentDate()} ${getCurrentHour()}`
-    } else if (tipo == "Venda" ){
+    } else if (tipo == "Venda") {
         user.ultima_venda = `${getCurrentDate()} ${getCurrentHour()}`
     }
 
+    user.total_atendimentos++
 
-
+    fs.writeFileSync(colaboradoresPath, JSON.stringify(colaboradores))
 
 }
 
@@ -25,10 +26,10 @@ function adicionarAtendimento(colaborador, tipo, autor, io){
 
 
 
-module.exports = {adicionarAtendimento }
+module.exports = { adicionarAtendimento }
 
 
-function getCurrentHour(){
+function getCurrentHour() {
 
     const date = new Date
 
@@ -39,14 +40,14 @@ function getCurrentHour(){
 
 }
 
-function getCurrentDate(){
+function getCurrentDate() {
 
     const date = new Date
 
-    const day = date.getHours()
-    const month = date.getMonth()
-    const year = date.getFullYear()
+    const day = date.getDate().toString().padStart(2, "0")
+    const month = (date.getMonth() + 1).toString().padStart(2, 0)
+    const year = date.getFullYear().toString()
 
-    return `${day}/${month - 1}/${year}`
+    return `${day}/${month}/${year}`
 
 }

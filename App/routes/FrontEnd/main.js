@@ -241,9 +241,38 @@ function addListenerTabelas (){
         fechar_transferir_atendimento()
     })
 
-})()
+})();
 
 /* Transferir Atendimentos */
+
+/* formulário */
+
+(function(){
+    const form = document.getElementById("transferir-atendimento")
+
+    form.addEventListener("submit", (evt)=>{
+        evt.preventDefault()
+
+        const formData = new FormData()
+
+        const colaboradorInput = document.getElementById("colaborador").value
+        const tipoInput = document.getElementById("tipo").value
+        const autor = localStorage.getItem("username")
+
+        formData.append("colaborador", colaboradorInput)
+        formData.append("tipo", tipoInput)
+        formData.append("autor", autor)
+
+        fetch("/transferir", {
+            method: "POST",
+            body: formData
+        })
+
+    })
+})()
+
+
+/* Responsividade */
 
 function abrir_transferir_atendimento(usuario, Tipo){
     const inputUser = transferir_section.querySelector('input[name="colaborador"]')
@@ -365,13 +394,16 @@ function filtrarPorData(objeto, chave){
 /* Socket IO */
 
 function inicializarSocket(){
+
+    console.log(window.location.hostname)
     
-    const socket = io("http://10.20.30.12:3500");
+    const socket = io(`http://${window.location.hostname}:3500`);
 
     socket.on('connect', () => {
-      console.log('Conectado ao servidor');
+      console.log('Conectado ao servidor com sucesso');
     });
     
     return socket
 
 }
+
