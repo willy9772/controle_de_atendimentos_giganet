@@ -18,7 +18,6 @@
         <header>
             <h1 id="username-title">Olá William!</h1>
             <div class="h-left">
-                <button class="mdsgn-button" id="btn-registrar">Registrar Atendimento</button>
                 <button class="mdsgn-button" id="btn-open-settings"><i class="fa-solid fa-gear"></i></button>
             </div>
         </header>
@@ -102,19 +101,16 @@
             <form class="transferir-atendimento" id="transferir-atendimento">
 
                 <div class="text-input">
-                    <input id="colaborador" type="text" name="colaborador" required>
+                    <input id="colaborador" type="text" name="colaborador" required readonly>
                     <label for="colaborador">Colaborador</label>
                 </div>
 
-                <div class="checkboxes">
-
-                    <input id="atendimento" type="radio" name="tipo" value="atendimento" checked required>
-                    <label for="atendimento">atendimento</label>
-
-                    <input id="venda" type="radio" name="tipo" value="venda" required>
-                    <label for="venda">venda</label>
-
+                <div class="text-input">
+                    <input id="tipo" type="text" name="tipo" required value="" readonly>
+                    <label for="tipo">tipo</label>
                 </div>
+
+
 
                 <input type="submit" class="mdsgn-button">
 

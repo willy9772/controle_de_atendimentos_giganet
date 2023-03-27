@@ -16,17 +16,17 @@ p {
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: var(--cor-secundaria-secundaria);
+    background: var(--cor-secundaria-terciaria);
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: var(--cor-primaria);
+    background: var(--cor-secundaria-secundaria);
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--cor-primaria-secundaria);
+    background: var();
   }
 
 .mdsgn-button {
@@ -55,6 +55,7 @@ p {
     --cor-primaria-secundaria: #7a0018;
     --cor-secundaria: #775655;
     --cor-secundaria-secundaria: #442928;
+    --cor-secundaria-terciaria: #271615;
     --cor-terciaria: #745a2e;
     --cor-terciaria-ligth: #ffdea7;
     --cor-erro: #e44040;
@@ -464,8 +465,7 @@ p {
 
 }
 
-.transferir-atendimento .text-input input:focus~label,
-.transferir-atendimento .text-input input:valid~label {
+.transferir-atendimento .text-input label {
     transform: translate(-5px, -25px);
     background-color: var(--cor-fundo);
 }

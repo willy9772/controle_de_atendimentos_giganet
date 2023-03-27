@@ -6,7 +6,6 @@ const borrar_fundo = document.querySelector(".borrar-fundo")
 
 addListenerTabelas()
 
-
 /* Funcionamento Geral */
 
 async function getUpdates() { 
@@ -107,11 +106,19 @@ async function carregarDashboard(){
 
 }
 
-function criarTrs(objeto, chaves){
+function criarTrs(objeto, chaves, tableName){
 
     const elemento = document.createElement("tr")
     elemento.setAttribute("colaborador", objeto.nome)
-    elemento.setAttribute("class", "clickable")
+
+    if (tableName){
+        elemento.setAttribute("tableName", tableName)
+    }
+
+    if (!arguments[3]){
+        elemento.setAttribute("class", "clickable")
+    }
+
 
     for (let i = 0; i < chaves.length; i++) {
         const chave = chaves[i];
@@ -125,7 +132,6 @@ function criarTrs(objeto, chaves){
     return elemento
 
 }
-
 
 function renderVendas(colaboradores){
 
@@ -144,7 +150,7 @@ function renderVendas(colaboradores){
     })
     
     usuarios.forEach((user)=>{
-        const elemento = criarTrs(user, ["nome", "ultima_venda"])
+        const elemento = criarTrs(user, ["nome", "ultima_venda"], "Venda")
         vendedoresTBody.insertAdjacentElement("afterbegin", elemento)
     })
 
@@ -166,7 +172,7 @@ function renderAtendimentos(colaboradores){
     })
 
     users.forEach((user)=>{
-        const elemento = criarTrs(user, ["nome", "setor", "ultimo_atendimento", "total_atendimentos"])
+        const elemento = criarTrs(user, ["nome", "setor", "ultimo_atendimento", "total_atendimentos"], "Atendimento")
         atendimentosTBody.insertAdjacentElement("afterbegin", elemento)
     })
 }
@@ -187,7 +193,7 @@ function renderOnlines(colaboradores){
     })
 
     users.forEach((user)=>{
-        const elemento = criarTrs(user, ["nome", "ativo_ate"])
+        const elemento = criarTrs(user, ["nome", "ativo_ate"], "", true)
         onlinesTBody.insertAdjacentElement("afterbegin", elemento)
     })
 }
@@ -215,24 +221,17 @@ function addListenerTabelas (){
         linha.addEventListener("click", ()=>{
             
             const user = linha.getAttribute("colaborador")
-            abrir_transferir_atendimento(user)
+            const tipo = linha.getAttribute("tableName")
+            abrir_transferir_atendimento(user, tipo)
 
         })
         
     }
 
-
-
 }
 
 /* Registrar Atendimentos */
 (function(){
-
-    const btnAbrir = document.getElementById("btn-registrar")
-
-    btnAbrir.addEventListener("click", ()=>{
-        abrir_transferir_atendimento()
-    })
 
     const btnFechar = transferir_section.querySelector("h1")
 
@@ -244,17 +243,16 @@ function addListenerTabelas (){
 
 /* Transferir Atendimentos */
 
-function abrir_transferir_atendimento(usuario){
-    const input = transferir_section.querySelector('input[name="colaborador"]')
+function abrir_transferir_atendimento(usuario, Tipo){
+    const inputUser = transferir_section.querySelector('input[name="colaborador"]')
+    const inputTipo = transferir_section.querySelector('input[name="tipo"]')
 
     transferir_section.style.display = "flex"
     mostarBorrarFundo(fechar_transferir_atendimento)
 
-    if (usuario) {
-        input.value = usuario
-    } else {
-        input.value = ""
-    }
+    inputUser.value = usuario
+    inputTipo.value = Tipo
+
 
 }
 
@@ -282,8 +280,6 @@ function esconderBorrarFundo(){
         borrar_fundo.style.display = "none"
     }, 500)
 }
-
-
 
 /* Funções Extras */
 
