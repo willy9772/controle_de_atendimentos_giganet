@@ -6,8 +6,6 @@ const borrar_fundo = document.querySelector(".borrar-fundo")
 
 addListenerTabelas()
 
-
-
 /* Funcionamento Geral */
 
 async function getUpdates() {
@@ -104,7 +102,6 @@ async function carregarDashboard() {
 
     renderVendas(colaboradores)
     renderAtendimentos(colaboradores)
-    renderOnlines(colaboradores)
 
     addListenerTabelas()
 
@@ -182,32 +179,8 @@ function renderAtendimentos(colaboradores) {
     })
 
     users.forEach((user) => {
-        const elemento = criarTrs(user, ["nome", "setor", "ultimo_atendimento", "total_atendimentos"], "Atendimento")
+        const elemento = criarTrs(user, ["nome", "setor", "ativo_ate", "ultimo_atendimento", "total_atendimentos"], "Atendimento")
         atendimentosTBody.insertAdjacentElement("afterbegin", elemento)
-    })
-}
-
-function renderOnlines(colaboradores) {
-
-    colaboradores = filtrarHorarios(colaboradores, "ativo_ate")
-
-    const onlinesTable = dashboard_section.querySelector(".tabela-onlines")
-    const onlinesTBody = onlinesTable.querySelector("tbody")
-
-    // Limpar Tabela
-    onlinesTBody.innerHTML = ""
-
-    const users = []
-
-    colaboradores.forEach((colaborador) => {
-        if (colaborador.online) {
-            users.push(colaborador)
-        }
-    })
-
-    users.forEach((user) => {
-        const elemento = criarTrs(user, ["nome", "ativo_ate"], "", true)
-        onlinesTBody.insertAdjacentElement("afterbegin", elemento)
     })
 }
 
