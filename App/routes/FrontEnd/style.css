@@ -8,6 +8,11 @@ p {
     font-family: "montserrat", "roboto";
 }
 
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/fonts/montserrat.ttf') format('truetype');
+  }
+
 
 /* width */
 ::-webkit-scrollbar {
