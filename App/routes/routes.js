@@ -2,11 +2,6 @@ const express = require("express")
 const router = express.Router()
 const { User_Login } = require("./Funções")
 const path = require("path")
-const multer = require("multer")
-const { adicionarAtendimento } = require("../Socket.io/Events/operações")
-
-const upload = multer()
-
 
 router.get("/", (req, res)=>{
     res.redirect("/Painel")

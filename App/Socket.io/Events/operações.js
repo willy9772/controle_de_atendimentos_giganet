@@ -4,7 +4,9 @@ const path = require("path")
 const colaboradoresPath = path.join(__dirname, "..", "..", "..", "Server", "Config", "Colaboradores.json")
 
 
-function adicionarAtendimento(colaborador, tipo, autor) {
+function transferirAtendimento(colaborador, tipo, autor) {
+
+    console.log(`Transferido um atendimento para o colaborador ${colaborador}, com o tipo ${tipo}, transferido por ${autor}`)
 
     const colaboradores = JSON.parse(fs.readFileSync(colaboradoresPath))
 
@@ -22,20 +24,8 @@ function adicionarAtendimento(colaborador, tipo, autor) {
 
 }
 
-function transferirAtendimento(colaborador, tipo, autor){
 
-    console.log(`Transferido um atendimento para o colaborador ${colaborador}, com o tipo ${tipo}, transferido por ${autor}`)
-
-    const result = adicionarAtendimento(colaborador, tipo, autor)
-
-    return result
-
-}
-
-
-
-
-module.exports = { adicionarAtendimento, transferirAtendimento }
+module.exports = { transferirAtendimento }
 
 
 function getCurrentHour() {

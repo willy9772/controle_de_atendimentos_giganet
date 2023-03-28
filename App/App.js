@@ -1,3 +1,4 @@
+const ServerRoutines = require("../Server/routines/main");
 const { startExpress } = require("./express/startExpress");
 const { emitirEventos } = require("./Socket.io/Events/listeners");
 const { startSocket } = require("./Socket.io/startSocket.io");
@@ -9,8 +10,11 @@ const { startSocket } = require("./Socket.io/startSocket.io");
 
     // Start Socket
     const io = startSocket(app)
-    
+
         // Listeners
         emitirEventos(io)
+
+    // Rodar as Rotinas do Servidor
+    ServerRoutines()
 
 })()
