@@ -33,8 +33,8 @@ function getCurrentHour() {
 
     const date = new Date
 
-    const hour = date.getHours()
-    const minute = date.getMinutes()
+    const hour = date.getHours().toString().padStart(2, "0")
+    const minute = date.getMinutes().toString().padStart(2, "0")
 
     return `${hour}:${minute}`
 

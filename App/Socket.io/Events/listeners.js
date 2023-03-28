@@ -6,15 +6,13 @@ const colaboradoresPath = path.join(__dirname, "..", "..", "..", "Server", "Conf
 
 function escutarEventos(io){
 
-    fs.watchFile(colaboradoresPath, {persistent: true}, (eventType, fileName)=>{
+    fs.watch(colaboradoresPath, {persistent: true}, (eventType, fileName)=>{
 
-        console.clear()
         console.log(`Arquivo Colaboradores atualizado e emitido ao FrontEnd`)
 
         io.emit("atualizar dashboard", {
             data: JSON.parse(fs.readFileSync(colaboradoresPath))
         })
-
 
     })
 

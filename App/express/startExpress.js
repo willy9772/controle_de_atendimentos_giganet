@@ -24,6 +24,8 @@ function startExpress() {
         console.log(`Servidor Sendo Executado com Sucesso!`)
     })
 
+    server.maxConnections = 1000
+
     return server
 
 }
