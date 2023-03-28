@@ -22,11 +22,20 @@ function adicionarAtendimento(colaborador, tipo, autor) {
 
 }
 
+function transferirAtendimento(colaborador, tipo, autor){
+
+    console.log(`Transferido um atendimento para o colaborador ${colaborador}, com o tipo ${tipo}, transferido por ${autor}`)
+
+    const result = adicionarAtendimento(colaborador, tipo, autor)
+
+    return result
+
+}
 
 
 
 
-module.exports = { adicionarAtendimento }
+module.exports = { adicionarAtendimento, transferirAtendimento }
 
 
 function getCurrentHour() {

@@ -6,6 +6,8 @@ const borrar_fundo = document.querySelector(".borrar-fundo")
 
 addListenerTabelas()
 
+
+
 /* Funcionamento Geral */
 
 async function getUpdates() {
@@ -252,33 +254,6 @@ function addListenerTabelas() {
 
 /* Transferir Atendimentos */
 
-/* formulário */
-
-(function () {
-    const form = document.getElementById("transferir-atendimento")
-
-    form.addEventListener("submit", (evt) => {
-        evt.preventDefault()
-
-        const formData = new FormData()
-
-        const colaboradorInput = document.getElementById("colaborador").value
-        const tipoInput = document.getElementById("tipo").value
-        const autor = localStorage.getItem("username")
-
-        formData.append("colaborador", colaboradorInput)
-        formData.append("tipo", tipoInput)
-        formData.append("autor", autor)
-
-        fetch("/transferir", {
-            method: "POST",
-            body: formData
-        })
-
-    })
-})()
-
-
 /* Responsividade */
 
 function abrir_transferir_atendimento(usuario, Tipo) {
@@ -412,6 +387,7 @@ function filtrarPorDataEHora(objeto, chave) {
 
 
 
+// Iniciar Socket
 
 /* Socket IO */
 
@@ -425,8 +401,31 @@ function inicializarSocket() {
 
     socket.on("atualizar dashboard", (data) => {
         carregarDashboard(data.data)
-    })
+    });
 
-    return socket
+    // Formulário para Transferir Atendimentos
+    (function () {
+        const form = document.getElementById("transferir-atendimento")
+    
+        form.addEventListener("submit", (evt) => {
+            
+            evt.preventDefault()
+
+            const colaboradorInput = document.getElementById("colaborador").value
+            const tipoInput = document.getElementById("tipo").value
+            const autor = localStorage.getItem("username")
+    
+            const data = {
+                colaborador: colaboradorInput,
+                tipo: tipoInput,
+                autor: autor
+            }
+
+            socket.emit("transferir atendimento", data)
+
+            fechar_transferir_atendimento()
+    
+        })
+    })();
 
 }

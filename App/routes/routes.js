@@ -40,21 +40,4 @@ router.get("/colaboradores", (req, res)=>{
 
 })
 
-router.post("/transferir", upload.none() ,(req, res)=>{
-
-    const colaborador = req.body.colaborador
-    const tipo = req.body.tipo
-    const autor = req.body.autor
-
-    if (!colaborador || !tipo || !autor){
-        res.send({message: `Verifique o colaborador e tente novamente!`})
-        return
-    }
-
-    console.log(`Transferido um atendimento para o colaborador ${colaborador}, com o tipo ${tipo}, transferido por ${autor}`)
-
-    const result = adicionarAtendimento(colaborador, tipo, autor)
-
-})
-
 module.exports = router

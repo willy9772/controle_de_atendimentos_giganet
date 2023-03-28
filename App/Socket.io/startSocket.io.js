@@ -1,4 +1,7 @@
+const { escutarEventos } = require("./Events/listeners")
+
 function startSocket(app) {
+
     const http = require("http")
     const server = http.createServer(app)
     const io = require("socket.io")(server, {
@@ -7,12 +10,15 @@ function startSocket(app) {
         }
     })
 
-    console.log("\nSocket Iniciado")
-
+    console.log("\nIO Iniciado")
 
     // server-side
     io.on("connection", (socket) => {
+
         console.log(`Novo Usuário Conectado`);
+
+        escutarEventos(socket)
+
     });
 
     server.listen(3500)
