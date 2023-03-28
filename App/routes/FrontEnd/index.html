@@ -19,7 +19,7 @@
         <header>
             <h1 id="username-title">Olá William!</h1>
             <div class="h-left">
-                <button class="mdsgn-button" id="btn-open-settings"><i class="fa-solid fa-gear"></i></button>
+                <button class="mdsgn-button" id="btn-open-settings"><i class="fa-solid fa-gear fa-spin"></i></button>
             </div>
         </header>
 
@@ -30,7 +30,7 @@
                 <form class="login-form">
                     <input id="password" type="password" name="acessKey" required autofocus>
                     <label for="password">Chave de acesso</label>
-                    
+
                     <input type="submit" class="mdsgn-button">
 
                 </form>
@@ -71,26 +71,57 @@
                 </table>
             </div>
 
-<!--             <div class="tabela">
-                <h1><i class="fa-solid fa-globe"></i>Onlines</h1>
-                <table class="tabela-onlines">
-                    <thead>
-                        <tr>
-                            <td>Colaborador</td>
-                            <td>Ativo Até</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div> -->
-
             <div class="filter-box">
                 <h3>Filtrar Por Colaborador</h3>
                 <form class="filter">
                     <input type="text">
                     <input type="submit" value="ok" class="mdsgn-button">
                 </form>
+            </div>
+
+            <div class="config-section">
+
+                <div class="config-head">
+                    <h1 class="title"><i class="fa-solid fa-gear fa-spin"></i> Configurações</h1>
+
+                    <div class="controls">
+                        <button class="mdsgn-button"><i class="fa-regular fa-clock fa-spin"></i> Horários de
+                            Sábado</button>
+                        <button class="mdsgn-button"><i class="fa-solid fa-user-plus"></i> Adicionar
+                            Colaborador</button>
+                        <button class="mdsgn-button"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+                    </div>
+
+
+                </div>
+
+                <section class="config-table">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Colaborador</td>
+                                <td>Vende</td>
+                                <td>Atende</td>
+                                <td>Setor</td>
+                                <td>Entrada 1</td>
+                                <td>Saída 1</td>
+                                <td>Entrada 2</td>
+                                <td>Saída 2</td>
+                                <td class="border-left">Entrada Sábado</td>
+                                <td>Saída Sábado</td>
+                            </tr>
+                        </thead>
+
+                        <tbody id="config-tbody">
+
+                        </tbody>
+
+                    </table>
+
+                </section>
+
+
             </div>
 
         </main>

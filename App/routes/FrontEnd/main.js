@@ -3,6 +3,7 @@ const login_section = document.querySelector(".userAuth")
 const dashboard_section = document.querySelector(".dashboard")
 const transferir_section = document.querySelector(".transferir-atendimentos")
 const borrar_fundo = document.querySelector(".borrar-fundo")
+const config_section = document.querySelector(".config-section")
 
 addListenerTabelas()
 
@@ -262,9 +263,7 @@ function mostarBorrarFundo(cb) {
 function esconderBorrarFundo() {
     borrar_fundo.style.opacity = "0"
     borrar_fundo.style.pointerEvents = "none"
-    setTimeout(() => {
-        borrar_fundo.style.display = "none"
-    }, 500)
+    borrar_fundo.style.display = "none"
 }
 
 /* Funções Extras */
@@ -345,7 +344,7 @@ function filtrarPorDataEHora(objeto, chave) {
 
     const resultado = objeto.sort(compararAeB)
 
-    function compararAeB(a, b){
+    function compararAeB(a, b) {
 
         const dataA = new Date(Date.parse(a[chave].replace(/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/, "$2/$1/$3 $4:$5")));
         const dataB = new Date(Date.parse(b[chave].replace(/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/, "$2/$1/$3 $4:$5")));
@@ -379,15 +378,15 @@ function inicializarSocket() {
     // Formulário para Transferir Atendimentos
     (function () {
         const form = document.getElementById("transferir-atendimento")
-    
+
         form.addEventListener("submit", (evt) => {
-            
+
             evt.preventDefault()
 
             const colaboradorInput = document.getElementById("colaborador").value
             const tipoInput = document.getElementById("tipo").value
             const autor = localStorage.getItem("username")
-    
+
             const data = {
                 colaborador: colaboradorInput,
                 tipo: tipoInput,
@@ -397,8 +396,79 @@ function inicializarSocket() {
             socket.emit("transferir atendimento", data)
 
             fechar_transferir_atendimento()
-    
+
         })
     })();
+
+};
+
+
+/* Tabela Configurações */
+
+// Listener Abrir Config
+
+(function () {
+    header.querySelector("#btn-open-settings").addEventListener("click", abrirConfiguracoes)
+})()
+
+function abrirConfiguracoes() {
+
+    config_section.style.display = "flex"
+    mostarBorrarFundo(fecharConfiguracoes)
+    atualizarConfigTable()
+
+}
+
+function fecharConfiguracoes() {
+    config_section.style.display = "none"
+    esconderBorrarFundo()
+}
+
+function gerarConfigTr(colaborador) {
+
+    const newTr = document.createElement("tr")
+
+    newTr.innerHTML = `
+<td><input type="text" class="mdsgn-text-input" value="${colaborador.nome}"></td>
+<td>
+    <div class="custom-checkbox">
+        <input class="table-checkbox" type="checkbox" ${colaborador.vende? "checked" : ""}>
+        <span class="checkmark"></span>
+    </div>
+</td>
+<td>
+    <div class="custom-checkbox">
+        <input class="table-checkbox" type="checkbox" ${colaborador.atende? "checked" : ""}>
+        <span class="checkmark"></span>
+    </div>
+</td>
+<td> <input type="text" class="mdsgn-text-input" value="${colaborador.setor}"> </td>
+<td> <input type="text" class="mdsgn-text-input" value="${colaborador.entrada_1}"> </td>
+<td> <input type="text" class="mdsgn-text-input" value="${colaborador.saida_1}"> </td>
+<td> <input type="text" class="mdsgn-text-input" value="${colaborador.entrada_2}"> </td>
+<td> <input type="text" class="mdsgn-text-input" value="${colaborador.saida_2}""> </td>
+<td class="border-left" > <input type="text" class="mdsgn-text-input" value="${colaborador.horario_sabado_entrada}"> </td>
+<td> <input type="text" class="mdsgn-text-input" value="${colaborador.horario_sabado_saida}"> </td>
+
+`
+    return newTr
+
+}
+
+async function atualizarConfigTable(){
+
+const tBody = document.getElementById("config-tbody")
+
+tBody.innerHTML = ""
+
+const colaboradores = await getUpdates()
+
+colaboradores.forEach((colaborador)=>{
+    
+    const elemento = gerarConfigTr(colaborador)
+
+    tBody.insertAdjacentElement("beforeend", elemento)
+
+})
 
 }
