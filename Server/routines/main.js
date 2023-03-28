@@ -7,7 +7,7 @@ function ServerRoutines(){
     
     setInterval(()=>{
         verificarOnlines()
-    }, 60000)
+    }, 15000)
 
 }
 
