@@ -38,7 +38,7 @@ function escutarEventos(io){
 
     io.on("update colaboradores", (newFile)=>{
         
-        const colaboradores = JSON.parse(fs.readFileSync(colaboradoresPath))
+        let colaboradores = JSON.parse(fs.readFileSync(colaboradoresPath))
 
         colaboradores = newFile
 

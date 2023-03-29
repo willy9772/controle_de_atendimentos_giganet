@@ -400,6 +400,67 @@ function inicializarSocket() {
 		})
 	})();
 
+	// Enviar Config File Atualizada
+	(function () {
+
+		const btn = document.getElementById("salvar-config")
+
+		btn.addEventListener("click", ()=>{
+			enviarConfigFile()
+		})
+
+		function enviarConfigFile(){
+			let colaboradores = []
+	
+			const tBody = document.getElementById("config-tbody")
+	
+			const Trs = tBody.querySelectorAll("tr")
+	
+			Trs.forEach((tr) => {
+	
+				const Tds = tr.querySelectorAll("td")
+	
+				const total_atendimentos = tr.getAttribute("total_atendimentos")
+				const ultima_venda = tr.getAttribute("ultima_venda")
+				const ultimo_atendimento = tr.getAttribute("ultimo_atendimento")
+	
+				const nome = Tds[0].querySelector("input").value
+				const vende = Tds[1].querySelector("input").checked
+				const atende = Tds[2].querySelector("input").checked
+				const setor = Tds[3].querySelector("input").value
+				const entrada_1 = Tds[4].querySelector("input").value
+				const saida_1 = Tds[5].querySelector("input").value
+				const entrada_2 = Tds[6].querySelector("input").value
+				const saida_2 = Tds[7].querySelector("input").value
+				const horario_entrada_sabado = Tds[8].querySelector("input").value
+				const horario_saida_sabado = Tds[8].querySelector("input").value
+	
+				colaboradores.push({
+	
+					nome: nome,
+					vende: vende,
+					atende: atende,
+					setor: setor,
+					entrada_1: entrada_1,
+					saida_1: saida_1,
+					entrada_2: entrada_2,
+					saida_2: saida_2,
+					horario_entrada_sabado: horario_entrada_sabado,
+					horario_saida_sabado: horario_saida_sabado,
+					total_atendimentos: total_atendimentos,
+					ultima_venda: ultima_venda,
+					ultimo_atendimento: ultimo_atendimento
+	
+				})
+	
+			})
+	
+			socket.emit("update colaboradores", colaboradores)
+		}
+
+
+	})()
+
 };
 
 
