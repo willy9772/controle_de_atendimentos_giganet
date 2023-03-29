@@ -34,6 +34,10 @@ function escutarEventos(io){
 
     })
 
+    io.on("update colaboradores", (socket)=>{
+        
+    })
+
 }
 
 

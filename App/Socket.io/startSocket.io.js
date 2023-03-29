@@ -6,7 +6,7 @@ function startSocket(app) {
     const server = http.createServer(app)
     const io = require("socket.io")(server, {
         cors: {
-            origin: "http://10.20.30.12:3000"
+            origin: "http://10.0.0.50:3000"
         }
     })
 

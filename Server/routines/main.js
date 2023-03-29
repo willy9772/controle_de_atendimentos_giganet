@@ -1,3 +1,4 @@
+const { limparAtendimentos } = require("./limparAtendimentos")
 const verificarOnlines = require("./verificarOnlines")
 
 
@@ -6,8 +7,11 @@ const verificarOnlines = require("./verificarOnlines")
 function ServerRoutines(){
     
     setInterval(()=>{
+
         verificarOnlines()
-    }, 15000)
+        limparAtendimentos()
+
+    }, 30000)
 
 }
 
