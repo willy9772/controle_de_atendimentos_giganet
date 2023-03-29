@@ -4,8 +4,8 @@ const colaboradoresPath = path.join(__dirname, "..", "Config", "Colaboradores.js
 
 function limparAtendimentos() {
 
-    if (!verificarMeiaNoite) { return }
-
+    if (!verificarMeiaNoite()) { return }
+    
     const colaboradores = JSON.parse(fs.readFileSync(colaboradoresPath))
 
     colaboradores.forEach(colaborador => {
