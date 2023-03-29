@@ -371,7 +371,7 @@ function inicializarSocket() {
 		console.log('Conectado ao servidor com sucesso');
 	});
 
-	socket.on("aviso", (aviso)=>{
+	socket.on("aviso", (aviso) => {
 		alert(aviso)
 	})
 
@@ -409,25 +409,25 @@ function inicializarSocket() {
 
 		const btn = document.getElementById("salvar-config")
 
-		btn.addEventListener("click", ()=>{
+		btn.addEventListener("click", () => {
 			enviarConfigFile()
 		})
 
-		function enviarConfigFile(){
+		function enviarConfigFile() {
 			let colaboradores = []
-	
+
 			const tBody = document.getElementById("config-tbody")
-	
+
 			const Trs = tBody.querySelectorAll("tr")
-	
+
 			Trs.forEach((tr) => {
-	
+
 				const Tds = tr.querySelectorAll("td")
-	
+
 				const total_atendimentos = tr.getAttribute("total_atendimentos")
 				const ultima_venda = tr.getAttribute("ultima_venda")
 				const ultimo_atendimento = tr.getAttribute("ultimo_atendimento")
-	
+
 				const nome = Tds[0].querySelector("input").value
 				const vende = Tds[1].querySelector("input").checked
 				const atende = Tds[2].querySelector("input").checked
@@ -438,9 +438,9 @@ function inicializarSocket() {
 				const saida_2 = Tds[7].querySelector("input").value
 				const horario_entrada_sabado = Tds[8].querySelector("input").value
 				const horario_saida_sabado = Tds[8].querySelector("input").value
-	
+
 				colaboradores.push({
-	
+
 					nome: nome,
 					vende: vende,
 					atende: atende,
@@ -454,15 +454,15 @@ function inicializarSocket() {
 					total_atendimentos: total_atendimentos,
 					ultima_venda: ultima_venda,
 					ultimo_atendimento: ultimo_atendimento
-	
+
 				})
-	
+
 			})
-	
+
 			socket.emit("update colaboradores", colaboradores)
-			
+
 			fecharConfiguracoes()
-			
+
 		}
 
 
@@ -592,5 +592,28 @@ function verificarHoraValida(input, event) {
 	if (input.value.length >= 5 && event.key != "Backspace") {
 		event.preventDefault()
 	}
+
+};
+
+
+// Função para filtrar por atendimento
+
+const btn_filtrar_atendimento = document.getElementById("btn-filtrar-atendimento")
+const btn_filtrar_suporte = document.getElementById("btn-filtrar-suporte")
+
+function verificarFiltrosAtivos() {
+
+	let ids = []
+
+	if (btn_filtrar_atendimento.classList.contains("btn-active")) { ids.push("btn_filtrar_atendimento") }
+	if (btn_filtrar_suporte.classList.contains("btn-active")) { ids.push("btn_filtrar_suporte") }
+
+	return ids
+
+}
+
+function filtrarTabelaporSetor(valor){
+
+	
 
 }
