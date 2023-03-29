@@ -1,5 +1,6 @@
 const fs = require("fs")
-const path = require("path")
+const path = require("path");
+const verificarOnlines = require("../../../Server/routines/verificarOnlines");
 const { transferirAtendimento, sendSessionkey } = require("./operações")
 const colaboradoresPath = path.join(__dirname, "..", "..", "..", "Server", "Config", "Colaboradores.json")
 
@@ -45,6 +46,10 @@ function escutarEventos(io){
         fs.writeFileSync(colaboradoresPath, JSON.stringify(colaboradores))
 
         console.log(`O arquivo de Colaboradores foi atualizado por um usuário`)
+
+        verificarOnlines()
+
+        io.emit("aviso", `Arquivo de configurações atualizado com sucesso!`)
 
     })
 

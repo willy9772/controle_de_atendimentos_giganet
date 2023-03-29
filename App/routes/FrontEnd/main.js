@@ -371,6 +371,10 @@ function inicializarSocket() {
 		console.log('Conectado ao servidor com sucesso');
 	});
 
+	socket.on("aviso", (aviso)=>{
+		alert(aviso)
+	})
+
 	socket.on("atualizar dashboard", (data) => {
 		carregarDashboard(data.data)
 	});
@@ -456,7 +460,11 @@ function inicializarSocket() {
 			})
 	
 			socket.emit("update colaboradores", colaboradores)
+			
+			fecharConfiguracoes()
+			
 		}
+
 
 
 	})()
@@ -488,6 +496,10 @@ function fecharConfiguracoes() {
 function gerarConfigTr(colaborador) {
 
 	const newTr = document.createElement("tr")
+
+	newTr.setAttribute("ultimo_atendimento", colaborador.ultimo_atendimento)
+	newTr.setAttribute("ultima_venda", colaborador.ultima_venda)
+	newTr.setAttribute("total_atendimentos", colaborador.total_atendimentos)
 
 	newTr.innerHTML = `
 <td tdName="nome"><input type="text" class="mdsgn-text-input" value="${colaborador.nome}"></td>
