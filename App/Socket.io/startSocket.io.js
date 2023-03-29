@@ -1,4 +1,5 @@
 const { escutarEventos } = require("./Events/listeners")
+const os = require("os")
 
 function startSocket(app) {
 
@@ -6,7 +7,7 @@ function startSocket(app) {
     const server = http.createServer(app)
     const io = require("socket.io")(server, {
         cors: {
-            origin: "http://10.20.30.12:3000"
+            origin: `http://${getLocalIpAddress()}:3000`
         }
     })
 
@@ -31,3 +32,15 @@ function startSocket(app) {
 
 
 module.exports = { startSocket }
+
+function getLocalIpAddress() {
+    const interfaces = os.networkInterfaces();
+    for (const interfaceName in interfaces) {
+      const interface = interfaces[interfaceName];
+      for (const address of interface) {
+        if (!address.internal && address.family === 'IPv4') {
+          return address.address;
+        }
+      }
+    }
+  }
