@@ -36,8 +36,16 @@ function escutarEventos(io){
 
     })
 
-    io.on("update colaboradores", (socket)=>{
+    io.on("update colaboradores", (newFile)=>{
         
+        const colaboradores = JSON.parse(fs.readFileSync(colaboradoresPath))
+
+        colaboradores = newFile
+
+        fs.writeFileSync(colaboradoresPath, JSON.stringify(colaboradores))
+
+        console.log(`O arquivo de Colaboradores foi atualizado por um usuário`)
+
     })
 
 }
