@@ -588,3 +588,10 @@ p {
     width: 40%;
 
 }
+
+.btn-active {
+
+    background-color: var(--cor-secundaria-secundaria);
+    color: white;
+
+}

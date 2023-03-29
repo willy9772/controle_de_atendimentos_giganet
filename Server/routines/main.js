@@ -11,7 +11,7 @@ function ServerRoutines(){
         verificarOnlines()
         limparAtendimentos()
 
-    }, 30000)
+    }, 15000)
 
 }
 
