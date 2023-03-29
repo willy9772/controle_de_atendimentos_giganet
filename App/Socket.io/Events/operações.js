@@ -24,8 +24,25 @@ function transferirAtendimento(colaborador, tipo, autor) {
 
 }
 
+function sendSessionkey(socket){
 
-module.exports = { transferirAtendimento }
+    const sessionKey = socket.id
+
+    socket.emit("new sessionKey", sessionKey)
+
+    console.log(`Enviado chave da sessão ${socket.id}`);
+
+    
+
+
+    socket.on("disconnect", (user)=>{
+        console.log(`O Socket ID ${socket.id} se desconectou`);
+    })
+
+}
+
+
+module.exports = { transferirAtendimento, sendSessionkey }
 
 
 function getCurrentHour() {

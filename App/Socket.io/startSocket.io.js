@@ -15,7 +15,7 @@ function startSocket(app) {
     // server-side
     io.on("connection", (socket) => {
 
-        console.log(`Novo Usuário Conectado`);
+        console.log(`Novo Usuário Conectado\nSocket ID ${socket.id}`);
 
         escutarEventos(socket)
 

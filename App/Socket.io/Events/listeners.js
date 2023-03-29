@@ -1,6 +1,6 @@
 const fs = require("fs")
 const path = require("path")
-const { transferirAtendimento } = require("./operações")
+const { transferirAtendimento, sendSessionkey } = require("./operações")
 const colaboradoresPath = path.join(__dirname, "..", "..", "..", "Server", "Config", "Colaboradores.json")
 
 
@@ -26,12 +26,18 @@ function escutarEventos(io){
 
     console.log(`Escutando Eventos`);
 
+    sendSessionkey(io)
+
     io.on("transferir atendimento", (socket)=>{
 
         console.log(JSON.stringify(socket))
 
         transferirAtendimento(socket.colaborador, socket.tipo, socket.autor)
 
+    })
+
+    io.on("update colaboradores", (socket)=>{
+        
     })
 
 }

@@ -17,8 +17,6 @@ router.post("/user/login", (req, res)=>{
 
     const result = User_Login(key)
 
-    console.log(result);
-
     if (!result){
         res.send(false)
         return

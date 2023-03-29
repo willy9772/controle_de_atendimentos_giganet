@@ -141,7 +141,7 @@ p {
     overflow: auto;
     border-left: 2px solid var(--cor-fundo) ;
     border-right: 2px solid var(--cor-fundo) ;
-    width: 25%;
+    width: 40%;
 }
 
 .tabela:nth-child(2){
@@ -479,7 +479,7 @@ p {
 
 .config-section {
 
-    width: 85%;
+    width: 95%;
     height: 90vh;
     background-color: var(--cor-secundaria);
     position: absolute;
@@ -519,7 +519,7 @@ p {
 /*Table*/
 
 .config-table {
-    padding: 25px;
+    padding: 15px 25px;
     background-color: var(--cor-fundo);
     box-sizing: border-box;
     border-radius: 15px;
@@ -552,13 +552,6 @@ p {
 
 }
 
-.config-table table thead tr td {
-
-    margin: 10px;
-
-}
-
-
 
 /*Globals*/
 
@@ -588,4 +581,10 @@ p {
 
 .border-left {
     border-left: 2px solid white;
+}
+
+.input-hour {
+
+    width: 40%;
+
 }
