@@ -2,6 +2,7 @@
   {
     "nome": "William Gerhard",
     "chave": "1",
+<<<<<<< HEAD
     "pode editar?": true,
     "pode transferir?": true
   },
@@ -10,17 +11,28 @@
     "chave": "1234",
     "pode editar?": false,
     "pode transferir?": false
+=======
+    "pode editar?": true
+>>>>>>> 84a7f91ac159fd0d4b9b8cdcb8cce7e682f9ffb8
   },
   {
     "nome": "Rogerinho",
     "chave": "30392203",
+<<<<<<< HEAD
     "pode editar?": true,
     "pode transferir?": true
+=======
+    "pode editar?": true
+>>>>>>> 84a7f91ac159fd0d4b9b8cdcb8cce7e682f9ffb8
   },
   {
     "nome": "Felipe Dias",
     "chave": "123",
+<<<<<<< HEAD
     "pode editar?": true,
     "pode transferir?": true
+=======
+    "pode editar?": true
+>>>>>>> 84a7f91ac159fd0d4b9b8cdcb8cce7e682f9ffb8
   }
 ]

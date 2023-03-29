@@ -400,60 +400,6 @@ function inicializarSocket() {
 		})
 	})();
 
-	// Atualizar o Arquivo de configurações
-	(function (){
-
-		const btn = document.getElementById("salvar-config")
-	
-		btn.addEventListener("click", salvarConfig)
-		
-		function salvarConfig(){
-	
-			let colaboradores = []
-	
-			const Trs = document.querySelectorAll("#config-tbody tr")
-	
-			Trs.forEach((tr)=>{
-	
-				const Tds = tr.querySelectorAll("td")
-	
-				colaboradores.push({
-	
-					nome: Tds[0].querySelector("input").value,
-					vende: Tds[1].querySelector("input").checked,
-					atende: Tds[2].querySelector("input").checked,
-					setor: Tds[3].querySelector("input").value,
-					entrada_1: Tds[4].querySelector("input").value,
-					saida_1: Tds[5].querySelector("input").value,
-					entrada_2: Tds[6].querySelector("input").value,
-					saida_2: Tds[7].querySelector("input").value,
-					horario_sabado_entrada: Tds[8].querySelector("input").value,
-					horario_sabado_saida: Tds[9].querySelector("input").value,
-	
-				})
-	
-			})
-	
-			socket.emit("update colaboradores", colaboradores)
-
-		}
-	
-	
-	})();
-
-	(function(){
-
-		socket.on("new sessionKey", (res)=>{
-
-			console.log(`Cadastrada Chave da sessão: ${res}`);
-
-			localStorage.setItem("sessionKey", res)
-
-		})
-
-	})();
-
-
 };
 
 
