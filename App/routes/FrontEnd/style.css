@@ -57,16 +57,16 @@ p {
 
 :root {
     --cor-primaria: #bf0026;
-    --cor-primaria-secundaria: #7a0018;
-    --cor-secundaria: #775655;
-    --cor-secundaria-secundaria: #442928;
-    --cor-secundaria-terciaria: #271615;
-    --cor-terciaria: #745a2e;
-    --cor-terciaria-ligth: #ffdea7;
-    --cor-erro: #e44040;
-    --cor-fundo: #201a1a;
-    --cor-ligth: #ffb4a8;
-    --cor-ligth2: rgb(255, 213, 207);
+    --cor-primaria-secundaria: #00315c;
+    --cor-secundaria: #005048;
+    --cor-secundaria-secundaria: #003731;
+    --cor-secundaria-terciaria: #003731;
+    --cor-terciaria: #89ceff;
+    --cor-terciaria-ligth: #00344d;
+    --cor-erro: #93000a;
+    --cor-fundo: #19272a;
+    --cor-ligth: #54dbc8;
+    --cor-ligth2: #9afff1;
     --cor-black: #0e0606;
 }
 
