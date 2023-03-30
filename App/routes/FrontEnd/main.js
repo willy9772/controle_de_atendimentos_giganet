@@ -103,6 +103,8 @@ async function carregarDashboard() {
 
 	renderVendas(colaboradores)
 	renderAtendimentos(colaboradores)
+	
+	filtrarTabelaporSetor()
 
 	addListenerTabelas()
 
@@ -601,19 +603,60 @@ function verificarHoraValida(input, event) {
 const btn_filtrar_atendimento = document.getElementById("btn-filtrar-atendimento")
 const btn_filtrar_suporte = document.getElementById("btn-filtrar-suporte")
 
-function verificarFiltrosAtivos() {
 
-	let ids = []
+async function filtrarTabelaporSetor() {
 
-	if (btn_filtrar_atendimento.classList.contains("btn-active")) { ids.push("btn_filtrar_atendimento") }
-	if (btn_filtrar_suporte.classList.contains("btn-active")) { ids.push("btn_filtrar_suporte") }
+	let setores = []
 
-	return ids
+	if (btn_filtrar_atendimento.classList.contains("btn-active")) { setores.push("atendimento") }
+	if (btn_filtrar_suporte.classList.contains("btn-active")) { setores.push("suporte") }
+
+	const table = dashboard_section.querySelector(".tabela-atendimentos")
+
+	const TbodyTrs = table.querySelector("tbody").querySelectorAll("tr")
+
+	TbodyTrs.forEach((tr) => {
+
+		if (setores){
+			tr.style.display = "table-row"
+		}
+
+		for (let i = 0; i < setores.length; i++) {
+			const setor = setores[i].toUpperCase();
+			const TrText = tr.querySelectorAll("td")[1].innerText
+
+			if (TrText.includes(setor)) {
+				tr.style.display = "table-row"
+				break
+			} else {
+				tr.style.display = "none"
+			}
+
+		}
+
+	})
+
 
 }
 
-function filtrarTabelaporSetor(valor){
+function filtrarTabela(botao) {
 
-	
+	if (botao.classList.contains("btn-active")) {
+		botao.classList.remove("btn-active")
+		filtrarTabelaporSetor()
+	} else {
+		botao.classList.add("btn-active")
+		filtrarTabelaporSetor()
+	}
 
 }
+
+// Add Listeners
+
+btn_filtrar_atendimento.addEventListener("click", () => {
+	filtrarTabela(btn_filtrar_atendimento)
+})
+
+btn_filtrar_suporte.addEventListener("click", () => {
+	filtrarTabela(btn_filtrar_suporte)
+})
