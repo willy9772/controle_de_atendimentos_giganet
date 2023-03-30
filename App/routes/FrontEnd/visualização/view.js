@@ -58,4 +58,4 @@ function gerarTr(colaborador) {
 
     tableBody.appendChild(elemento)
 
-}
+};
