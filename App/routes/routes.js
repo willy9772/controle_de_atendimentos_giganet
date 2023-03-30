@@ -3,8 +3,17 @@ const router = express.Router()
 const { User_Login } = require("./Funções")
 const path = require("path")
 
+router.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store')
+    next()
+  })
+
 router.get("/", (req, res)=>{
-    res.redirect("/Painel")
+    res.redirect(`/geral`)
+})
+
+router.get("/geral", (req, res)=>{
+    res.sendFile( __dirname + "/FrontEnd/visualização/visualizacao.html")
 })
 
 router.get("/Painel", (req, res)=>{

@@ -18,13 +18,9 @@ function startExpress() {
     const routes = require("../routes/routes")
     server.use('/', routes);
 
-    console.log("Rotas Carregadas com Sucesso!")
-
     server.listen(3000, () => {
         console.log(`Servidor Sendo Executado com Sucesso!`)
     })
-
-    server.maxConnections = 1000
 
     return server
 
