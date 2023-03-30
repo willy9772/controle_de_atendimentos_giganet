@@ -14,11 +14,16 @@ function transferirAtendimento(colaborador, tipo, autor) {
 
     if (tipo == "Atendimento") {
         user.ultimo_atendimento = `${getCurrentDate()} ${getCurrentHour()}`
+        user.total_atendimentos++
     } else if (tipo == "Venda") {
         user.ultima_venda = `${getCurrentDate()} ${getCurrentHour()}`
+        if(!user.total_vendas){
+            user.total_vendas = 0
+        } else {
+            user.total_vendas++
+        }
     }
 
-    user.total_atendimentos++
 
     fs.writeFileSync(colaboradoresPath, JSON.stringify(colaboradores))
 

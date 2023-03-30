@@ -11,6 +11,7 @@ function limparAtendimentos() {
     colaboradores.forEach(colaborador => {
 
         colaborador.total_atendimentos = 0
+        colaborador.total_vendas = 0
 
     });
 
