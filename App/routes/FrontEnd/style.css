@@ -21,12 +21,13 @@ p {
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: var(--cor-secundaria-terciaria);
+    background: none;
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: var(--cor-secundaria-secundaria);
+    border-radius: 100px;
   }
   
   /* Handle on hover */
