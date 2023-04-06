@@ -1,25 +1,25 @@
 const path = require("path")
 const fs = require("fs")
-const { log } = require("console")
-const colaboradoresPath = path.join(__dirname, "..", "Config", "Colaboradores.json")
+const { log } = require("console");
 
-function limparAtendimentos() {
+async function limparAtendimentos() {
 
-    if (verificarMeiaNoite()) { log(`Não é meia-noite!`); return }
-
-/*     if (verificarSeJaFoiLimpo()){ log(`Atendimentos Já foram Limpos!`); return }
-     */
-
+    if (verificarSeJaFoiLimpoHoje()){ return }
     
-}
+    console.clear()
+    log(`Limpando Atendimentos!`)
 
-function verificarMeiaNoite() {
-    const agora = new Date();
-    if (agora.getHours() === 1 && agora.getMinutes() === 1) {
-        return true
-    } else {
-        return false
-    }
+    const { databases } = require("../DB/Config/config_db");
+    const colaboradoresdb = databases.bds[0]
+
+    const backUp = await colaboradoresdb.findAll({})
+
+    fs.writeFileSync(path.join(__dirname, "..", "Config", "backups", buscarDataAtual(), "Colaboradores.json"), JSON.stringify(backUp))
+
+    backUp.forEach((user)=>{
+        user.update({total_atendimentos: 0, total_vendas: 0})
+    })
+
 }
 
 function buscarDataAtual() {
@@ -34,11 +34,12 @@ function buscarDataAtual() {
 
 }
 
-function verificarSeJaFoiLimpo(){
+function verificarSeJaFoiLimpoHoje(){
 
     if (fs.existsSync(path.join(__dirname, "..", "Config", "backups", buscarDataAtual()))){
         return true
     } else {
+        fs.mkdirSync(path.join(__dirname, "..", "Config", "backups", buscarDataAtual()))
         return false
     }
 
