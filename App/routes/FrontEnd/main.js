@@ -103,7 +103,7 @@ async function carregarDashboard() {
 
 	renderVendas(colaboradores)
 	renderAtendimentos(colaboradores)
-	
+
 	filtrarTabelaporSetor()
 
 	addListenerTabelas()
@@ -439,7 +439,10 @@ function inicializarSocket() {
 				const entrada_2 = Tds[6].querySelector("input").value
 				const saida_2 = Tds[7].querySelector("input").value
 				const horario_entrada_sabado = Tds[8].querySelector("input").value
-				const horario_saida_sabado = Tds[8].querySelector("input").value
+				const horario_saida_sabado = Tds[9].querySelector("input").value
+
+				console.log(horario_entrada_sabado);
+				console.log(horario_saida_sabado);
 
 				colaboradores.push({
 
@@ -466,8 +469,6 @@ function inicializarSocket() {
 			fecharConfiguracoes()
 
 		}
-
-
 
 	})()
 
@@ -497,6 +498,8 @@ function fecharConfiguracoes() {
 
 function gerarConfigTr(colaborador) {
 
+	console.log(colaborador);
+
 	const newTr = document.createElement("tr")
 
 	newTr.setAttribute("ultimo_atendimento", colaborador.ultimo_atendimento)
@@ -522,8 +525,8 @@ function gerarConfigTr(colaborador) {
 <td> <input tdName="saida_1" type="text" class="mdsgn-text-input-config input-hour" value="${colaborador.saida_1}"> </td>
 <td> <input tdName="entrada_2" type="text" class="mdsgn-text-input-config input-hour" value="${colaborador.entrada_2}"> </td>
 <td> <input tdName="saida_2" type="text" class="mdsgn-text-input-config input-hour" value="${colaborador.saida_2}""> </td>
-<td class="border-left" tdName="horario_sabado_entrada" >  <input type="text" class="mdsgn-text-input-config input-hour" value="${colaborador.horario_sabado_entrada}"> </td>
-<td> <input type="text" tdName="horario_sabado_saida" class="mdsgn-text-input-config input-hour" value="${colaborador.horario_sabado_saida}"> </td>
+<td class="border-left" tdName="horario_sabado_entrada" >  <input type="text" class="mdsgn-text-input-config input-hour" value="${colaborador.horario_entrada_sabado}"> </td>
+<td> <input type="text" tdName="horario_sabado_saida" class="mdsgn-text-input-config input-hour" value="${colaborador.horario_saida_sabado}"> </td>
 
 `
 	return newTr
@@ -591,7 +594,7 @@ function verificarHoraValida(input, event) {
 		}
 	}
 
-	if (input.value.length >= 5 && event.key !== "ArrowLeft" && event.key !== "Tab" && event.key !== "ArrowRight" && event.key !== "Backspace" && event.key !== "Delete" ) {
+	if (input.value.length >= 5 && event.key !== "ArrowLeft" && event.key !== "Tab" && event.key !== "ArrowRight" && event.key !== "Backspace" && event.key !== "Delete") {
 		event.preventDefault()
 	}
 
@@ -617,7 +620,7 @@ async function filtrarTabelaporSetor() {
 
 	TbodyTrs.forEach((tr) => {
 
-		if (setores){
+		if (setores) {
 			tr.style.display = "table-row"
 		}
 

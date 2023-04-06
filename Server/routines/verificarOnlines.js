@@ -22,7 +22,7 @@ async function verificarOnlines() {
         if (verificarSeéFimDeSemana()) {
 
             if (verificarHoraAtualNoIntervalo(horario_entrada_sabado, horario_saida_sabado)) {
-                colaborador.update({ online: true })
+                colaborador.update({ online: true, ativo_ate: horario_saida_sabado })
                 return
             }
 
@@ -32,12 +32,12 @@ async function verificarOnlines() {
         }
 
         if (verificarHoraAtualNoIntervalo(entrada_1, saida_1)) {
-            colaborador.update({ online: true })
+            colaborador.update({ online: true, ativo_ate: saida_1 })
             return
         }
 
         if (verificarHoraAtualNoIntervalo(entrada_2, saida_2)) {
-            colaborador.update({ online: true })
+            colaborador.update({ online: true, ativo_ate: saida_2 })
             return
         }
 

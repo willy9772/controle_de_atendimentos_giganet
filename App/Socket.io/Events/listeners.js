@@ -1,6 +1,4 @@
 const verificarOnlines = require("../../../Server/routines/verificarOnlines");
-const { sendSessionkey } = require("./operações")
-
 
 function emitirEventos(io, DB) {
 
@@ -10,23 +8,19 @@ function emitirEventos(io, DB) {
 
         const arquivo = await colaboradores_Db.findAll({})
 
-        // Enviar atualização à Dashboard
-        console.log(`Arquivo Colaboradores atualizado e emitido ao FrontEnd`)
+            io.emit("atualizar dashboard", {
+                data: arquivo
+            })
+            // Enviar atualização à Dashboard
+            console.log(`Arquivo Colaboradores atualizado e emitido ao FrontEnd`)
 
-        io.emit("atualizar dashboard", {
-            data: arquivo
-        })
-
-    }, 2500)
-
+    }, 7500)
 
 }
 
 function escutarEventos(io, DB) {
 
     console.log(`Escutando Eventos`);
-
-    sendSessionkey(io)
 
     io.on("transferir atendimento", async (socket) => {
 
@@ -49,7 +43,6 @@ function escutarEventos(io, DB) {
             io.emit("aviso", `Colaborador não encontrado!`)
         }
     })
-
 
     io.on("update colaboradores", (colaboradores_a_atualizar) => {
 

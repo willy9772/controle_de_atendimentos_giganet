@@ -59,15 +59,15 @@ p {
 :root {
     --cor-primaria: #bf0026;
     --cor-primaria-secundaria: #00315c;
-    --cor-secundaria: #005048;
-    --cor-secundaria-secundaria: #003731;
-    --cor-secundaria-terciaria: #003731;
+    --cor-secundaria: #00315c;
+    --cor-secundaria-secundaria: #156dba;
+    --cor-secundaria-terciaria: #00203c;
     --cor-terciaria: #89ceff;
-    --cor-terciaria-ligth: #00344d;
+    --cor-terciaria-ligth: #0e3859;
     --cor-erro: #93000a;
-    --cor-fundo: #19272a;
-    --cor-ligth: #54dbc8;
-    --cor-ligth2: #9afff1;
+    --cor-fundo: #001221;
+    --cor-ligth: #3ca4ff;
+    --cor-ligth2: #79c0ff;
     --cor-black: #0e0606;
 }
 
