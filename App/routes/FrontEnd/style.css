@@ -553,6 +553,28 @@ p {
 
 }
 
+.mdsgn-text-input-config {
+    width: 80%;
+    text-align: center;
+
+    position: relative;
+    padding: 10px;
+    outline: none;
+
+    border-radius: 5px;
+    background-color: transparent;
+
+    border: 1px solid rgba(255, 255, 255, 0.327);
+
+    color: white;
+    font-size: 20px;
+    caret-color: var(--cor-ligth);
+    transition: all ease .4s;
+}
+
+.mdsgn-text-input-config:hover, .mdsgn-text-input-config:focus {
+    border: 1px solid rgb(255, 255, 255);
+}
 
 /*Globals*/
 

@@ -1,17 +1,20 @@
 [
   {
     "nome": "William Gerhard",
-    "chave": "1",
-    "pode editar?": true
+    "chave": "123",
+    "pode editar?": true,
+    "pode transferir?": true
   },
   {
     "nome": "Rogerinho",
-    "chave": "30392203",
-    "pode editar?": true
+    "chave": "8546",
+    "pode editar?": true,
+    "pode transferir?": true
   },
   {
     "nome": "Felipe Dias",
-    "chave": "123",
-    "pode editar?": true
+    "chave": "8654",
+    "pode editar?": true,
+    "pode transferir?": true
   }
 ]

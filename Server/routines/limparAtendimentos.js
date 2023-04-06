@@ -7,16 +7,9 @@ function limparAtendimentos() {
 
     if (verificarMeiaNoite()) { log(`Não é meia-noite!`); return }
 
-    if (verificarSeJaFoiLimpo()){ log(`Atendimentos Já foram Limpos!`); return }
-    
-    console.clear()
-    log(`Limpando atendimentos!`)
+/*     if (verificarSeJaFoiLimpo()){ log(`Atendimentos Já foram Limpos!`); return }
+     */
 
-    RegistrarAtendimentos()
-
-    Limpar()
-
-    console.log(`Atendimentos Limpos`)
     
 }
 
@@ -27,39 +20,6 @@ function verificarMeiaNoite() {
     } else {
         return false
     }
-}
-
-function Limpar(){
-    
-    const colaboradores = JSON.parse(fs.readFileSync(colaboradoresPath))
-    
-    colaboradores.forEach(colaborador => {
-
-        colaborador.total_atendimentos = 0
-        colaborador.total_vendas = 0
-        
-    });
-
-    fs.writeFileSync(colaboradoresPath, JSON.stringify(colaboradores))
-    
-}
-
-function RegistrarAtendimentos(){
-
-    const colaboradores = JSON.parse(fs.readFileSync(colaboradoresPath))
-
-    criarDiretorio()
-
-    fs.writeFileSync(path.join(__dirname, "..", "Config", "backups", buscarDataAtual(), "Colaboradores.json"), JSON.stringify(colaboradores))
-
-}
-
-function criarDiretorio(){
-
-    if(!fs.existsSync(path.join(__dirname, "..", "Config", "backups", buscarDataAtual()))) {
-        fs.mkdirSync(path.join(__dirname, "..", "Config", "backups", buscarDataAtual()))
-    }
-
 }
 
 function buscarDataAtual() {

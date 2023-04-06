@@ -1,7 +1,7 @@
 const { escutarEventos } = require("./Events/listeners")
 const os = require("os")
 
-function startSocket(app) {
+function startSocket(app, DB) {
 
     const http = require("http")
     const server = http.createServer(app)
@@ -18,7 +18,7 @@ function startSocket(app) {
 
         console.log(`Novo Usuário Conectado\nSocket ID ${socket.id}`);
 
-        escutarEventos(socket)
+        escutarEventos(socket, DB)
 
     });
 

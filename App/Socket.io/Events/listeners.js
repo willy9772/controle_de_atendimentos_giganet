@@ -1,55 +1,95 @@
-const fs = require("fs")
-const path = require("path");
 const verificarOnlines = require("../../../Server/routines/verificarOnlines");
-const { transferirAtendimento, sendSessionkey } = require("./operações")
-const colaboradoresPath = path.join(__dirname, "..", "..", "..", "Server", "Config", "Colaboradores.json")
+const { sendSessionkey } = require("./operações")
 
 
+function emitirEventos(io, DB) {
 
-function emitirEventos(io) {
+    colaboradores_Db = DB.bds[0]
 
-    console.log(`Emitindo Eventos`);
+    setInterval(async () => {
 
-    // Enviar atualização à Dashboard
-    fs.watch(colaboradoresPath, { persistent: true }, (eventType, fileName) => {
+        const arquivo = await colaboradores_Db.findAll({})
 
+        // Enviar atualização à Dashboard
         console.log(`Arquivo Colaboradores atualizado e emitido ao FrontEnd`)
 
         io.emit("atualizar dashboard", {
-            data: JSON.parse(fs.readFileSync(colaboradoresPath))
+            data: arquivo
         })
 
-    })
+    }, 2500)
+
 
 }
 
-function escutarEventos(io){
+function escutarEventos(io, DB) {
 
     console.log(`Escutando Eventos`);
 
     sendSessionkey(io)
 
-    io.on("transferir atendimento", (socket)=>{
+    io.on("transferir atendimento", async (socket) => {
 
-        console.log(JSON.stringify(socket))
+        const { databases } = require("../../../Server/DB/Config/config_db")
+        const colaboradores_db = databases.bds[0]
 
-        transferirAtendimento(socket.colaborador, socket.tipo, socket.autor)
+        const query = await colaboradores_db.findOne({ where: { nome: socket.colaborador } })
 
+        if (query) {
+            let ultimo_valor
+            if (socket.tipo == "Atendimento") {
+                ultimo_valor = Number(query.total_atendimentos) + 1
+                await query.update({ total_atendimentos: ultimo_valor, ultimo_atendimento: buscar_data_e_hora() })
+            } else if (socket.tipo == "Venda") {
+                ultimo_valor = Number(query.total_vendas) + 1
+                await query.update({ total_vendas: ultimo_valor, ultima_venda: buscar_data_e_hora() })
+            }
+
+        } else {
+            io.emit("aviso", `Colaborador não encontrado!`)
+        }
     })
 
-    io.on("update colaboradores", (newFile)=>{
-        
-        let colaboradores = JSON.parse(fs.readFileSync(colaboradoresPath))
 
-        colaboradores = newFile
+    io.on("update colaboradores", (colaboradores_a_atualizar) => {
 
-        fs.writeFileSync(colaboradoresPath, JSON.stringify(colaboradores))
+        const { databases } = require("../../../Server/DB/Config/config_db")
+        const colaboradores_db = databases.bds[0]
 
-        console.log(`O arquivo de Colaboradores foi atualizado por um usuário`)
+        colaboradores_a_atualizar.forEach(async (colaborador) => {
+
+            const nome = colaborador.nome
+            const atende = colaborador.atende
+            const vende = colaborador.vende
+            const setor = colaborador.setor
+            const entrada_1 = colaborador.entrada_1
+            const entrada_2 = colaborador.entrada_2
+            const saida_1 = colaborador.saida_1
+            const saida_2 = colaborador.saida_2
+            const horario_entrada_sabado = colaborador.horario_entrada_sabado
+            const horario_saida_sabado = colaborador.horario_saida_sabado
+
+            await colaboradores_db.findOne({ where: { nome: nome } }).then(async (result) => {
+
+                await result.update({
+                    setor: setor,
+                    entrada_1: entrada_1,
+                    entrada_2: entrada_2,
+                    saida_1: saida_1,
+                    saida_2: saida_2,
+                    horario_entrada_sabado: horario_entrada_sabado,
+                    horario_saida_sabado: horario_saida_sabado,
+                    atende: atende,
+                    vende: vende,
+                })
+
+            })
+
+        })
+
+        io.emit("aviso", `Colaboradores atualizados com sucesso!`)
 
         verificarOnlines()
-
-        io.emit("aviso", `Arquivo de configurações atualizado com sucesso!`)
 
     })
 
@@ -57,3 +97,18 @@ function escutarEventos(io){
 
 
 module.exports = { emitirEventos, escutarEventos }
+
+function buscar_data_e_hora() {
+
+    const data = new Date
+
+    const dia = data.getDate().toString().padStart(2, 0)
+    const mes = (data.getMonth() + 1).toString().padStart(2, 0)
+    const ano = data.getFullYear().toString()
+
+    const hora = data.getHours().toString().padStart(2, 0)
+    const min = data.getMinutes().toString().padStart(2, 0)
+
+    return `${dia}/${mes}/${ano} ${hora}:${min}`
+
+}

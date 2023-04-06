@@ -97,9 +97,9 @@ async function carregarDashboard() {
 	dashboard_section.style.display = "flex"
 	header.style.display = "flex"
 
-	atualizarUsername()
-
 	const colaboradores = await getUpdates()
+
+	atualizarUsername()
 
 	renderVendas(colaboradores)
 	renderAtendimentos(colaboradores)
@@ -378,7 +378,7 @@ function inicializarSocket() {
 	})
 
 	socket.on("atualizar dashboard", (data) => {
-		carregarDashboard(data.data)
+		carregarDashboard()
 	});
 
 	// Formulário para Transferir Atendimentos
@@ -504,7 +504,7 @@ function gerarConfigTr(colaborador) {
 	newTr.setAttribute("total_atendimentos", colaborador.total_atendimentos)
 
 	newTr.innerHTML = `
-<td tdName="nome"><input type="text" class="mdsgn-text-input" value="${colaborador.nome}"></td>
+<td tdName="nome"><input type="text" class="mdsgn-text-input-config" value="${colaborador.nome}"></td>
 <td tdName="vende">
     <div class="custom-checkbox">
         <input class="table-checkbox" type="checkbox" ${colaborador.vende ? "checked" : ""}>
@@ -517,13 +517,13 @@ function gerarConfigTr(colaborador) {
         <span class="checkmark"></span>
     </div>
 </td>
-<td> <input tdName="setor" type="text" class="mdsgn-text-input" value="${colaborador.setor}"> </td>
-<td> <input tdName="entrada_1" type="text" class="mdsgn-text-input input-hour" value="${colaborador.entrada_1}"> </td>
-<td> <input tdName="saida_1" type="text" class="mdsgn-text-input input-hour" value="${colaborador.saida_1}"> </td>
-<td> <input tdName="entrada_2" type="text" class="mdsgn-text-input input-hour" value="${colaborador.entrada_2}"> </td>
-<td> <input tdName="saida_2" type="text" class="mdsgn-text-input input-hour" value="${colaborador.saida_2}""> </td>
-<td class="border-left" tdName="horario_sabado_entrada" >  <input type="text" class="mdsgn-text-input input-hour" value="${colaborador.horario_sabado_entrada}"> </td>
-<td> <input type="text" tdName="horario_sabado_saida" class="mdsgn-text-input input-hour" value="${colaborador.horario_sabado_saida}"> </td>
+<td> <input tdName="setor" type="text" class="mdsgn-text-input-config" value="${colaborador.setor}"> </td>
+<td> <input tdName="entrada_1" type="text" class="mdsgn-text-input-config input-hour" value="${colaborador.entrada_1}"> </td>
+<td> <input tdName="saida_1" type="text" class="mdsgn-text-input-config input-hour" value="${colaborador.saida_1}"> </td>
+<td> <input tdName="entrada_2" type="text" class="mdsgn-text-input-config input-hour" value="${colaborador.entrada_2}"> </td>
+<td> <input tdName="saida_2" type="text" class="mdsgn-text-input-config input-hour" value="${colaborador.saida_2}""> </td>
+<td class="border-left" tdName="horario_sabado_entrada" >  <input type="text" class="mdsgn-text-input-config input-hour" value="${colaborador.horario_sabado_entrada}"> </td>
+<td> <input type="text" tdName="horario_sabado_saida" class="mdsgn-text-input-config input-hour" value="${colaborador.horario_sabado_saida}"> </td>
 
 `
 	return newTr
@@ -561,7 +561,7 @@ function addListenerInputsHora() {
 
 			verificarHoraValida(input, event)
 
-			if (!/[0-9:]/.test(event.key) && event.key !== "ArrowLeft" && event.jey !== "Tab" && event.key !== "ArrowRight" && event.key !== "Backspace") {
+			if (!/[0-9:]/.test(event.key) && event.key !== "ArrowLeft" && event.key !== "Tab" && event.key !== "ArrowRight" && event.key !== "Backspace" && event.key !== "Delete") {
 				event.preventDefault();
 			}
 
@@ -591,7 +591,7 @@ function verificarHoraValida(input, event) {
 		}
 	}
 
-	if (input.value.length >= 5 && event.key != "Backspace") {
+	if (input.value.length >= 5 && event.key !== "ArrowLeft" && event.key !== "Tab" && event.key !== "ArrowRight" && event.key !== "Backspace" && event.key !== "Delete" ) {
 		event.preventDefault()
 	}
 
