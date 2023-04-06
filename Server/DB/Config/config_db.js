@@ -47,6 +47,7 @@ function carregar_colaboradoresDb(sequelize) {
         atende: DataTypes.BOOLEAN,
         vende: DataTypes.BOOLEAN,
         setor: DataTypes.STRING,
+        ativo_ate: DataTypes.STRING,
         entrada_1: DataTypes.CHAR,
         saida_1: DataTypes.CHAR,
         entrada_2: DataTypes.CHAR,

@@ -35,7 +35,7 @@ async function verificarOnlines() {
             colaborador.update({ online: true, ativo_ate: saida_1 })
             return
         }
-
+        
         if (verificarHoraAtualNoIntervalo(entrada_2, saida_2)) {
             colaborador.update({ online: true, ativo_ate: saida_2 })
             return
